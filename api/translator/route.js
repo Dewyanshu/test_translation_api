@@ -7,7 +7,7 @@ const translate = require('translate-google');
 const translationRoutes = {
     translatorPostRoute: (req, res) => {
         try {
-            if (Object.keys(req.body).length == 0) { throw { status: 404, msg: 'Text not found' }; }
+            if (Object.keys(req.body).length == 0) { throw { status: 404, msg: 'Body data not found' }; }
             let reqKeys = Object.keys(req.body), validRequest = 0;
             for(let key in reqKeys){
                 if(reqKeys[key].match('text')){
@@ -15,7 +15,7 @@ const translationRoutes = {
                     break;
                 }
             }
-            if (!validRequest) { throw { status: 404, msg: 'Invalid Request data.' }; }
+            if (!validRequest) { throw { status: 404, msg: 'Invalid request data.' }; }
             if (req.body.text.length == 0) { throw { status: 404, msg: 'Please send some text to translate.' }; }
             const { text } = req.body;
             const detectlanguage = new DetectLanguage(process.env.API_KEY_LANGUAGE);
