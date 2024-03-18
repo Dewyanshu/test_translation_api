@@ -7,10 +7,11 @@ const translate = require('translate-google');
 const translationRoutes = {
     translatorPostRoute: (req, res) => {
         try {
+            if (typeof req.body !== "object") { throw { status: 400, msg: "Not a valid JSON." } }
             if (Object.keys(req.body).length == 0) { throw { status: 404, msg: 'Body data not found' }; }
             let reqKeys = Object.keys(req.body), validRequest = 0;
-            for(let key in reqKeys){
-                if(reqKeys[key].match('text')){
+            for (let key in reqKeys) {
+                if (reqKeys[key].match('text')) {
                     validRequest++;
                     break;
                 }
